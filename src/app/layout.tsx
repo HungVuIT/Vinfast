@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
+import { Be_Vietnam_Pro } from "next/font/google";
 import "./globals.css";
 
-const roboto = Roboto({
-  variable: "--font-roboto",
+const beVietnam = Be_Vietnam_Pro({
+  variable: "--font-sans-vn",
   subsets: ["latin", "vietnamese"],
-  weight: ["400", "500", "700"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -28,8 +29,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="vi" className={`${roboto.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col bg-white text-[#212529]">
+    <html lang="vi" className={`${beVietnam.variable} h-full antialiased`}>
+      <body className="flex min-h-full flex-col bg-white text-slate-800">
         {children}
       </body>
     </html>

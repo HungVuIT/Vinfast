@@ -37,7 +37,7 @@ export default function PromotionsPage() {
                   Gọi ngay
                 </a>
                 <a
-                  href="https://zalo.me/0868888925"
+                  href={`https://zalo.me/${CONTACT.phoneRaw}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="rounded bg-[#0ea5e9] px-5 py-2.5 font-semibold text-white"
@@ -124,7 +124,7 @@ export default function PromotionsPage() {
                   Gọi ngay
                 </a>
                 <a
-                  href="https://zalo.me/0868888925"
+                  href={`https://zalo.me/${CONTACT.phoneRaw}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="rounded bg-[#0ea5e9] px-5 py-2.5 font-semibold text-white"

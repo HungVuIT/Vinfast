@@ -5,19 +5,26 @@ interface BreadcrumbItem {
 
 export default function Breadcrumb({ items }: { items: BreadcrumbItem[] }) {
   return (
-    <div className="bg-[#003469]">
-      <div className="mx-auto max-w-[1140px] px-4 py-3">
+    <div className="border-b border-slate-100 bg-slate-50">
+      <div className="container-page py-4">
         <nav aria-label="breadcrumb">
-          <ol className="flex flex-wrap items-center gap-2 text-sm font-medium uppercase text-white">
+          <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
             {items.map((item, i) => (
               <li key={item.label} className="flex items-center gap-2">
-                {i > 0 && <span className="text-white/60">›</span>}
+                {i > 0 && (
+                  <svg className="h-3.5 w-3.5 text-slate-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                  </svg>
+                )}
                 {item.href ? (
-                  <a href={item.href} className="hover:text-[#f0c808]">
+                  <a
+                    href={item.href}
+                    className="font-medium text-slate-500 transition-colors hover:text-[#003469]"
+                  >
                     {item.label}
                   </a>
                 ) : (
-                  <span className="text-white/80">{item.label}</span>
+                  <span className="font-semibold text-[#003469]">{item.label}</span>
                 )}
               </li>
             ))}

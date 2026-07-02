@@ -458,8 +458,8 @@ export const BANNERS = [
 ];
 
 export const CONTACT = {
-  phone: "086 8888 925",
-  phoneRaw: "0868888925",
+  phone: "0352 444 809",
+  phoneRaw: "0352444809",
   salesName: "Phi Long",
   email: "chaulong.vinfast@gmail.com",
   address: "643 QL1A, Kp2, Long Bình, Biên Hòa, Đồng Nai",
@@ -468,7 +468,8 @@ export const CONTACT = {
   taxId: "3603191328",
   taxDate: "23/06/2014",
   representative: "NGUYỄN THỊ NGỌC THẢO",
-  facebook: "https://www.facebook.com/thanhdanhvinfast",
+  facebook: "https://www.facebook.com/VinFastdongnaichinhhang",
+  messenger: "https://m.me/VinFastdongnaichinhhang",
   website: "https://vinfastautovn.com/",
 };
 

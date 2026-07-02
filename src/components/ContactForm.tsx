@@ -7,7 +7,12 @@ export default function ContactForm() {
 
   if (submitted) {
     return (
-      <div className="rounded-md bg-green-50 p-4 text-green-800">
+      <div className="rounded-2xl bg-green-50 p-6 text-green-800">
+        <div className="mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
+          <svg className="h-6 w-6 text-green-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
         Cảm ơn bạn đã liên hệ! Chúng tôi sẽ phản hồi trong thời gian sớm nhất.
       </div>
     );
@@ -22,52 +27,56 @@ export default function ContactForm() {
       className="space-y-4"
     >
       <div>
-        <label htmlFor="input-name" className="mb-1 block text-sm font-medium text-[#333]">
-          Họ:
+        <label htmlFor="input-name" className="mb-1.5 block text-sm font-semibold text-slate-700">
+          Họ và tên
         </label>
         <input
           id="input-name"
           name="name"
           type="text"
           required
-          className="w-full rounded border border-[#ced4da] px-3 py-2 text-[15px] outline-none focus:border-[#003469]"
+          placeholder="Nhập họ tên của bạn"
+          className="w-full rounded-xl border border-slate-200 px-4 py-3 text-[15px] outline-none transition-colors placeholder:text-slate-400 focus:border-[#003469] focus:ring-2 focus:ring-[#003469]/10"
         />
       </div>
 
       <div>
-        <label htmlFor="input-email" className="mb-1 block text-sm font-medium text-[#333]">
-          E-Mail:
+        <label htmlFor="input-email" className="mb-1.5 block text-sm font-semibold text-slate-700">
+          E-Mail
         </label>
         <input
           id="input-email"
           name="email"
           type="email"
           required
-          className="w-full rounded border border-[#ced4da] px-3 py-2 text-[15px] outline-none focus:border-[#003469]"
+          placeholder="email@example.com"
+          className="w-full rounded-xl border border-slate-200 px-4 py-3 text-[15px] outline-none transition-colors placeholder:text-slate-400 focus:border-[#003469] focus:ring-2 focus:ring-[#003469]/10"
         />
       </div>
 
       <div>
-        <label htmlFor="input-enquiry" className="mb-1 block text-sm font-medium text-[#333]">
-          Nội dung:
+        <label htmlFor="input-enquiry" className="mb-1.5 block text-sm font-semibold text-slate-700">
+          Nội dung
         </label>
         <textarea
           id="input-enquiry"
           name="enquiry"
-          rows={8}
+          rows={6}
           required
-          className="w-full rounded border border-[#ced4da] px-3 py-2 text-[15px] outline-none focus:border-[#003469]"
+          placeholder="Nội dung cần tư vấn..."
+          className="w-full rounded-xl border border-slate-200 px-4 py-3 text-[15px] outline-none transition-colors placeholder:text-slate-400 focus:border-[#003469] focus:ring-2 focus:ring-[#003469]/10"
         />
       </div>
 
-      <div className="text-right">
-        <button
-          type="submit"
-          className="rounded border-2 border-[#003469] bg-[#003469] px-6 py-2.5 font-bold text-white transition-colors hover:bg-white hover:text-[#003469]"
-        >
-          Gửi đi
-        </button>
-      </div>
+      <button
+        type="submit"
+        className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-[#003469] to-[#012a55] px-7 py-3 font-bold text-white shadow-lg shadow-[#003469]/25 transition-transform hover:-translate-y-0.5"
+      >
+        Gửi đi
+        <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M13 5l7 7-7 7M5 12h15" />
+        </svg>
+      </button>
     </form>
   );
 }
