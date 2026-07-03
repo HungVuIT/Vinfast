@@ -19,3 +19,4 @@ export interface Car {
   image: string;
   gallery: string[];
 }
+// frfr
