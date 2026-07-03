@@ -110,9 +110,9 @@ Mọi trang bọc `Header` + `Footer` + `FloatingCall`. Slug không tồn tại 
 
 Trong `CONTACT` ([`src/lib/cars.ts`](src/lib/cars.ts)) — **đổi 1 chỗ, cả site đổi theo**:
 
-- **SĐT hiển thị:** `0352 444 809` — raw: `0352444809` (dùng cho `tel:` và `zalo.me`)
-- salesName: `Phi Long` *(tên này giữ từ bản cũ — nếu người phụ trách mới đổi thì sửa `salesName`)*
-- email: `chaulong.vinfast@gmail.com`
+- **SĐT hiển thị:** `+84 34 980 8574` — raw: `0349808574` (dùng cho `tel:` và `zalo.me`)
+- salesName: `Gina Phương` *(nếu người phụ trách mới đổi thì sửa `salesName`)*
+- email: `ginaphuongg@gmail.com`
 - địa chỉ: `643 QL1A, Kp2, Long Bình, Biên Hòa, Đồng Nai`
 - **facebook:** `https://www.facebook.com/VinFastdongnaichinhhang`
 - **messenger:** `https://m.me/VinFastdongnaichinhhang`
@@ -150,3 +150,4 @@ Tất cả ảnh đã tải về local từ site gốc; không phụ thuộc CDN
 ---
 
 @AGENTS.md
+

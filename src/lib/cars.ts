@@ -458,10 +458,10 @@ export const BANNERS = [
 ];
 
 export const CONTACT = {
-  phone: "0352 444 809",
-  phoneRaw: "0352444809",
-  salesName: "Phi Long",
-  email: "chaulong.vinfast@gmail.com",
+  phone: "+84 34 980 8574",
+  phoneRaw: "0349808574",
+  salesName: "Gina Phương",
+  email: "ginaphuongg@gmail.com",
   address: "643 QL1A, Kp2, Long Bình, Biên Hòa, Đồng Nai",
   hours: "Từ 8h00 đến 20h (Hoạt động cả tuần)",
   company: "CÔNG TY TNHH THƯƠNG MẠI DỊCH VỤ Ô TÔ KIM SƠN",
