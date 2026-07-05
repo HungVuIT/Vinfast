@@ -29,7 +29,7 @@ const STATS = [
 
 export default function StatsBar() {
   return (
-    <div className="container-page relative z-30 -mt-14 sm:-mt-16">
+    <div className="container-page relative z-30 mt-4 sm:-mt-16">
       <Reveal className="overflow-hidden rounded-2xl border border-slate-100 bg-white/95 shadow-[0_20px_60px_rgba(0,27,56,0.12)] backdrop-blur-xl">
         <div className="grid grid-cols-2 divide-x divide-y divide-slate-100 sm:grid-cols-4 sm:divide-y-0">
           {STATS.map((stat) => (

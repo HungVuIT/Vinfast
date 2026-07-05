@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { CARS, CONTACT } from "@/lib/cars";
+import { CARS, CONTACT, getPriceInfo } from "@/lib/cars";
 
 const NAV_LINKS = [
   { label: "Trang chủ", href: "/" },
@@ -72,12 +72,16 @@ export default function Header() {
       >
         <div className="container-page">
           <nav
-            className={`flex items-center justify-between transition-all duration-300 ${
+            className={`relative flex items-center justify-between transition-all duration-300 ${
               scrolled ? "py-2" : "py-3"
             }`}
           >
-            {/* Logo */}
-            <a href="/" title="Vinfast Kim Sơn Long Bình Đồng Nai" className="flex-shrink-0">
+            {/* Logo — căn giữa trên mobile, căn trái từ lg */}
+            <a
+              href="/"
+              title="Vinfast Kim Sơn Long Bình Đồng Nai"
+              className="flex-shrink-0 max-lg:absolute max-lg:left-1/2 max-lg:top-1/2 max-lg:-translate-x-1/2 max-lg:-translate-y-1/2"
+            >
               <Image
                 src="/images/logo.png"
                 alt="Vinfast Kim Sơn Long Bình Đồng Nai"
@@ -128,8 +132,11 @@ export default function Header() {
                         <h3 className="mt-1.5 text-center text-[13px] font-semibold text-slate-700 group-hover/item:text-[#003469]">
                           {car.name}
                         </h3>
-                        <p className="text-center text-[12px] font-bold text-[#c8102e]">
-                          {car.price.replace(" VNĐ", "")}
+                        <p className="flex items-center justify-center gap-1.5 text-center text-[12px] font-bold text-[#c8102e]">
+                          {getPriceInfo(car).sale}
+                          <span className="text-[10px] font-normal text-slate-400 line-through">
+                            {getPriceInfo(car).original}
+                          </span>
                         </p>
                       </a>
                     ))}
@@ -242,7 +249,10 @@ export default function Header() {
                     </div>
                     <p className="mt-1 text-center text-xs font-semibold text-slate-700">{car.name}</p>
                     <p className="text-center text-[11px] font-bold text-[#c8102e]">
-                      {car.price.replace(" VNĐ", "")}
+                      {getPriceInfo(car).sale}
+                    </p>
+                    <p className="text-center text-[10px] text-slate-400 line-through">
+                      {getPriceInfo(car).original}
                     </p>
                   </a>
                 ))}

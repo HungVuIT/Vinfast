@@ -4,7 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingCall from "@/components/FloatingCall";
 import Breadcrumb from "@/components/Breadcrumb";
-import { CARS, CONTACT } from "@/lib/cars";
+import { CARS, CONTACT, getPriceInfo } from "@/lib/cars";
 
 export const metadata: Metadata = {
   title: "Bảng giá xe | Vinfast Kim Sơn Long Bình Đồng Nai",
@@ -26,22 +26,27 @@ export default function PriceListPage() {
                 Bảng giá xe <span className="text-gradient-brand">VinFast</span>
               </h1>
               <p className="mt-2 text-slate-500">
-                Giá niêm yết mới nhất năm 2026. Liên hệ hotline để nhận báo giá lăn bánh & ưu đãi.
+                Giá niêm yết mới nhất năm 2026. Đang áp dụng{" "}
+                <span className="font-semibold text-[#c8102e]">ưu đãi giảm 6% (VF7, VF8 giảm 10%)</span>.
+                Liên hệ hotline để nhận báo giá lăn bánh & ưu đãi.
               </p>
             </div>
 
             <div className="mt-10 overflow-hidden rounded-2xl border border-slate-100 shadow-sm">
               <div className="overflow-x-auto">
-                <table className="w-full min-w-[560px] text-sm">
+                <table className="w-full min-w-[640px] text-sm">
                   <thead>
                     <tr className="bg-gradient-to-r from-[#003469] to-[#012a55] text-left text-white">
                       <th className="px-5 py-4 font-semibold">Dòng xe</th>
                       <th className="px-5 py-4 font-semibold">Giá niêm yết</th>
+                      <th className="px-5 py-4 font-semibold">Giá ưu đãi</th>
                       <th className="px-5 py-4 text-right font-semibold">Chi tiết</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {CARS.map((car, i) => (
+                    {CARS.map((car, i) => {
+                      const price = getPriceInfo(car);
+                      return (
                       <tr
                         key={car.slug}
                         className={`border-t border-slate-100 transition-colors hover:bg-brand-50 ${
@@ -62,9 +67,20 @@ export default function PriceListPage() {
                             <span className="font-semibold text-slate-800">{car.name}</span>
                           </div>
                         </td>
-                        <td className="px-5 py-3 text-lg font-extrabold text-[#c8102e]">
-                          {car.price.replace(" VNĐ", "")}
-                          <span className="ml-1 text-xs font-medium text-slate-400">đ</span>
+                        <td className="px-5 py-3 font-medium text-slate-400 line-through">
+                          {price.original}
+                          <span className="ml-1 text-xs">đ</span>
+                        </td>
+                        <td className="px-5 py-3">
+                          <div className="flex items-center gap-2">
+                            <span className="text-lg font-extrabold text-[#c8102e]">
+                              {price.sale}
+                              <span className="ml-1 text-xs font-medium text-slate-400">đ</span>
+                            </span>
+                            <span className="rounded bg-[#c8102e]/10 px-1.5 py-0.5 text-xs font-bold text-[#c8102e]">
+                              -{price.percent}%
+                            </span>
+                          </div>
                         </td>
                         <td className="px-5 py-3 text-right">
                           <a
@@ -78,7 +94,8 @@ export default function PriceListPage() {
                           </a>
                         </td>
                       </tr>
-                    ))}
+                      );
+                    })}
                   </tbody>
                 </table>
               </div>

@@ -94,8 +94,8 @@ export const CARS: Car[] = [
     ],
     "image": "/images/cars/vf5.png",
     "gallery": [
-      "/images/gallery/vinfast-vf5-89/1.png",
       "/images/gallery/vinfast-vf5-89/2.jpg",
+      "/images/gallery/vinfast-vf5-89/1.png",
       "/images/gallery/vinfast-vf5-89/3.jpg",
       "/images/gallery/vinfast-vf5-89/4.jpg",
       "/images/gallery/vinfast-vf5-89/5.jpg",
@@ -472,6 +472,60 @@ export const CONTACT = {
   messenger: "https://m.me/VinFastdongnaichinhhang",
   website: "https://vinfastautovn.com/",
 };
+
+/* ------------------------------------------------------------------ *
+ * Khuyến mãi giảm giá
+ * - Mặc định: giảm 6% cho mọi dòng xe.
+ * - Riêng VF7 & VF8 (gồm VF8 New): giảm 10%.
+ * Đổi mức giảm ở đây là toàn site (card, bảng giá, trang chi tiết…) tự đổi.
+ * ------------------------------------------------------------------ */
+const DISCOUNT_OVERRIDES: Record<string, number> = {
+  "vinfast-vf7-91": 10,
+  "vinfast-vf8-92": 10,
+  "vinfast-vf8-new-100": 10,
+};
+const DEFAULT_DISCOUNT = 6;
+
+export interface PriceInfo {
+  /** Phần trăm giảm (6 hoặc 10) */
+  percent: number;
+  /** Giá gốc dạng số */
+  originalNum: number;
+  /** Giá sau giảm dạng số */
+  saleNum: number;
+  /** Số tiền tiết kiệm dạng số */
+  savedNum: number;
+  /** Giá gốc đã format: "302,000,000" */
+  original: string;
+  /** Giá sau giảm đã format: "283,880,000" */
+  sale: string;
+  /** Tiền tiết kiệm đã format: "18,120,000" */
+  saved: string;
+}
+
+function formatVnd(n: number): string {
+  return Math.round(n)
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+/** Tính thông tin giá (gốc / sau giảm / tiết kiệm) cho 1 xe. */
+export function getPriceInfo(car: Car): PriceInfo {
+  const percent = DISCOUNT_OVERRIDES[car.slug] ?? DEFAULT_DISCOUNT;
+  const originalNum = parseInt(car.price.replace(/[^\d]/g, ""), 10) || 0;
+  // làm tròn xuống đơn vị nghìn cho gọn
+  const saleNum = Math.round((originalNum * (100 - percent)) / 100 / 1000) * 1000;
+  const savedNum = originalNum - saleNum;
+  return {
+    percent,
+    originalNum,
+    saleNum,
+    savedNum,
+    original: formatVnd(originalNum),
+    sale: formatVnd(saleNum),
+    saved: formatVnd(savedNum),
+  };
+}
 
 export function getCarBySlug(slug: string): Car | undefined {
   return CARS.find((c) => c.slug === slug);

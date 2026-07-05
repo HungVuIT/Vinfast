@@ -6,7 +6,8 @@ import Breadcrumb from "@/components/Breadcrumb";
 import ProductGallery from "@/components/ProductGallery";
 import OtherCarsRow from "@/components/OtherCarsRow";
 import QuoteSidebarForm from "@/components/QuoteSidebarForm";
-import { CARS, CONTACT, getCarBySlug, getOtherCars } from "@/lib/cars";
+import DetailActions from "@/components/DetailActions";
+import { CARS, getCarBySlug, getOtherCars, getPriceInfo } from "@/lib/cars";
 
 export function generateStaticParams() {
   return CARS.map((car) => ({ slug: car.slug }));
@@ -20,18 +21,12 @@ export async function generateMetadata({
   const { slug } = await params;
   const car = getCarBySlug(slug);
   if (!car) return {};
+  const price = getPriceInfo(car);
   return {
     title: `${car.name} | Vinfast Kim Sơn Long Bình Đồng Nai`,
-    description: `${car.name} - Giá bán: ${car.price}. ${car.priceExtra}`,
+    description: `${car.name} - Giá ưu đãi giảm ${price.percent}% chỉ còn ${price.sale}đ (niêm yết ${price.original}đ). ${car.priceExtra}`,
   };
 }
-
-const ACTION_BUTTONS = [
-  { label: "Phụ trách kinh doanh", info: `${CONTACT.salesName}: ${CONTACT.phone}`, href: `tel:${CONTACT.phoneRaw}`, icon: "📞" },
-  { label: "Gửi liên hệ", info: "Đăng ký lái thử", href: "#lai-thu", icon: "🚗" },
-  { label: "Gửi liên hệ", info: "Yêu cầu báo giá", href: "#bao-gia", icon: "💰" },
-  { label: "Tham khảo", info: "Chi phí lăn bánh", href: "#chi-phi", icon: "🧮" },
-];
 
 export default async function CarDetailPage({
   params,
@@ -42,6 +37,7 @@ export default async function CarDetailPage({
   const car = getCarBySlug(slug);
   if (!car) notFound();
 
+  const price = getPriceInfo(car);
   const otherCars = getOtherCars(slug);
 
   return (
@@ -74,11 +70,30 @@ export default async function CarDetailPage({
                   {car.name}
                 </h1>
 
-                <div className="mt-5 flex items-end justify-between rounded-2xl bg-slate-50 p-5">
-                  <div>
-                    <span className="text-sm font-medium text-slate-500">Giá bán từ</span>
-                    <div className="text-3xl font-extrabold text-[#c8102e]">{car.price}</div>
+                <div className="mt-5 overflow-hidden rounded-2xl border border-[#c8102e]/15 bg-gradient-to-br from-[#fff5f6] to-slate-50 p-5">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-sm font-medium text-slate-500">
+                      Giá niêm yết:{" "}
+                      <span className="font-semibold text-slate-400 line-through">
+                        {price.original}đ
+                      </span>
+                    </span>
+                    <span className="inline-flex items-center rounded-full bg-gradient-to-r from-[#c8102e] to-[#9e0c24] px-3 py-1 text-xs font-bold text-white shadow-sm">
+                      Giảm {price.percent}%
+                    </span>
                   </div>
+                  <div className="mt-2 flex items-end justify-between gap-2">
+                    <div>
+                      <span className="text-sm font-medium text-slate-500">Giá ưu đãi từ</span>
+                      <div className="text-3xl font-extrabold leading-tight text-[#c8102e] sm:text-4xl">
+                        {price.sale}
+                        <span className="ml-1 text-lg font-bold">đ</span>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="mt-2 inline-flex items-center gap-1.5 rounded-lg bg-green-50 px-2.5 py-1 text-sm font-semibold text-green-700">
+                    <span>💰</span> Tiết kiệm {price.saved}đ
+                  </p>
                 </div>
 
                 {car.priceExtra && (
@@ -106,23 +121,7 @@ export default async function CarDetailPage({
                   </div>
                 )}
 
-                <div id="bao-gia" className="mt-5 grid grid-cols-2 gap-3">
-                  {ACTION_BUTTONS.map((btn) => (
-                    <a
-                      key={btn.label + btn.info}
-                      href={btn.href}
-                      className="group flex items-center gap-3 rounded-2xl border border-slate-100 bg-white p-3 shadow-sm transition-all hover:-translate-y-0.5 hover:border-[#003469]/20 hover:shadow-md"
-                    >
-                      <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-brand-50 text-lg">
-                        {btn.icon}
-                      </span>
-                      <span className="flex flex-col leading-tight">
-                        <span className="text-xs text-slate-500">{btn.label}</span>
-                        <span className="text-sm font-bold text-[#003469]">{btn.info}</span>
-                      </span>
-                    </a>
-                  ))}
-                </div>
+                <DetailActions carName={car.name} carPrice={price.sale} />
               </div>
             </div>
           </div>

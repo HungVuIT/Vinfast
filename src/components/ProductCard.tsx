@@ -1,7 +1,9 @@
 import Image from "next/image";
 import type { Car } from "@/types/car";
+import { getPriceInfo } from "@/lib/cars";
 
 export default function ProductCard({ car }: { car: Car }) {
+  const price = getPriceInfo(car);
   return (
     <a
       href={`/san-pham/${car.slug}`}
@@ -14,6 +16,9 @@ export default function ProductCard({ car }: { car: Car }) {
             <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z" />
           </svg>
           Xe điện
+        </span>
+        <span className="absolute right-3 top-3 z-10 inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-[#c8102e] to-[#9e0c24] px-2.5 py-1 text-[11px] font-bold text-white shadow-lg shadow-[#c8102e]/30">
+          Giảm {price.percent}%
         </span>
         <Image
           src={car.image}
@@ -29,12 +34,18 @@ export default function ProductCard({ car }: { car: Car }) {
         <h3 className="text-lg font-bold text-slate-900 transition-colors group-hover:text-[#003469]">
           {car.name}
         </h3>
-        <div className="mt-1 flex items-baseline gap-1.5">
-          <span className="text-xs font-medium text-slate-400">Giá từ</span>
-          <span className="text-xl font-extrabold text-[#c8102e]">
-            {car.price.replace(" VNĐ", "")}
-          </span>
-          <span className="text-xs font-medium text-slate-400">đ</span>
+        <div className="mt-1.5">
+          <div className="flex items-baseline gap-1.5">
+            <span className="text-xs font-medium text-slate-400">Giá ưu đãi</span>
+            <span className="text-xl font-extrabold text-[#c8102e]">{price.sale}</span>
+            <span className="text-xs font-medium text-slate-400">đ</span>
+          </div>
+          <div className="mt-0.5 flex items-center gap-2 text-xs">
+            <span className="text-slate-400 line-through">{price.original}đ</span>
+            <span className="rounded bg-[#c8102e]/10 px-1.5 py-0.5 font-bold text-[#c8102e]">
+              -{price.percent}%
+            </span>
+          </div>
         </div>
 
         <div className="mt-4 flex items-center justify-between border-t border-slate-100 pt-4">

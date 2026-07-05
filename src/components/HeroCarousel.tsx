@@ -23,7 +23,7 @@ export default function HeroCarousel() {
 
   return (
     <section
-      className="group relative h-[min(58vw,660px)] min-h-[440px] w-full overflow-hidden bg-[#001b38]"
+      className="group relative aspect-[1920/620] w-full overflow-hidden bg-[#001b38] sm:aspect-auto sm:h-[min(58vw,660px)] sm:min-h-[440px]"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
@@ -41,7 +41,7 @@ export default function HeroCarousel() {
             alt={banner.alt}
             fill
             priority={i === 0}
-            className={`object-cover ${i === index ? "animate-kenburns" : ""}`}
+            className={`object-contain object-top sm:object-cover sm:object-center ${i === index ? "animate-kenburns" : ""}`}
             sizes="100vw"
           />
         </a>
@@ -72,7 +72,7 @@ export default function HeroCarousel() {
       </button>
 
       {/* Progress dots */}
-      <div className="absolute bottom-16 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2.5 sm:bottom-20">
+      <div className="absolute bottom-3 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2.5 sm:bottom-20">
         {BANNERS.map((_, i) => (
           <button
             key={i}
