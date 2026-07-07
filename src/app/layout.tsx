@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Be_Vietnam_Pro } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const beVietnam = Be_Vietnam_Pro({
@@ -32,6 +33,7 @@ export default function RootLayout({
     <html lang="vi" className={`${beVietnam.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col bg-white text-slate-800">
         {children}
+        <Analytics />
       </body>
     </html>
   );
